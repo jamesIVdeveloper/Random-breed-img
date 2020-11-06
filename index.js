@@ -11,12 +11,16 @@ function getRandomBreed(inputValue) {
 
 function displayImage(responseJson) {
     console.log(responseJson);
-    $('.result-img').before(`src="${responseJson.message}"`)
+    var image = new Image();
+    image.src = responseJson.message;
+    $('#container').append(image);
+    
     $('.result').removeClass('hidden')
 }
 
 function watchForm() {
     $('form').submit(event => {
+        $('#container').html('');
         event.preventDefault();
         let inputValue = $('#breed').val();
         getRandomBreed(inputValue);
