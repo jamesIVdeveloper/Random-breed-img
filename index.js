@@ -6,16 +6,20 @@ function getRandomBreed(inputValue) {
     fetch(requiredUrl)
         .then(response => response.json())
         .then(responseJson => displayImage(responseJson))
-        .catch(error => alert('Sorry, breed not found.'));
+        .catch(error => alert('Breed not found.'))
 }
 
 function displayImage(responseJson) {
     console.log(responseJson);
+    if (responseJson.code === 404) {
+        $('#container').append(alert);
+    } else {
     var image = new Image();
     image.src = responseJson.message;
     $('#container').append(image);
     
     $('.result').removeClass('hidden')
+    }
 }
 
 function watchForm() {
